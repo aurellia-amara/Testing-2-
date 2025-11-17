@@ -7,16 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet" />
   <style>
       body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-image: url('images/page2.jpg');
-  background-repeat: no-repeat;
-background-position: center center;
-background-size: cover;
-background-attachment: fixed; /* opsional, supaya background tidak scroll */
-width: 100vw;
-height: 100vh;
-}
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('images/page2.jpg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed; /* opsional */
+        width: 100vw;
+        height: 100vh;
+      }
     #topbar {
       position: fixed;
       top: 0;
@@ -56,7 +56,7 @@ height: 100vh;
       font-family: "Alfa Slab One", serif;
       text-decoration: none;
       margin-left: 25px;
-      font-size: 1.2rem;    /* diperkecil */
+      font-size: 1rem;    /* lebih kecil */
       font-weight: bold;
       transition: color 0.2s;
     }
@@ -116,7 +116,7 @@ height: 100vh;
     /* -------- Tambahan untuk main text -------- */
     .main-text {
       text-align: center;
-      margin-top: 100px;
+      margin-top: 130px;
     }
     .main-text h1 {
       font-family: 'Alfa Slab One', serif;
@@ -128,14 +128,18 @@ height: 100vh;
       margin: 0 auto;
       letter-spacing: 1.5px;
     }
-@media (max-width: 768px) {
-  #navbar a {
-    font-size: 0.9rem;
-  }
 
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      #hamburgerBtn {
+        display: block;
+      }
+      #navbar {
+        display: none; /* hide navbar links mobile */
+      }
       #navbar a {
-  font-size: 1.2rem;
-}
+        font-size: 0.9rem;
+      }
       #sidebar {
         width: 65vw;
         min-width: 140px;
@@ -145,6 +149,9 @@ height: 100vh;
         top: 55px;
         height: calc(100vh - 55px);
         transform: translateX(-100%);
+        position: fixed;
+        z-index: 2500;
+        transition: transform 0.3s ease;
       }
       #sidebar.show {
         transform: translateX(0);
@@ -169,7 +176,7 @@ height: 100vh;
         padding: 0 8px;
       }
       .main-text {
-        margin-top: 35px;
+        margin-top: 60px;
       }
     }
     /* Pastikan sidebar selalu muncul di desktop */
@@ -182,6 +189,9 @@ height: 100vh;
       }
       #hamburgerBtn {
         display: none !important;
+      }
+      #navbar {
+        display: flex !important;
       }
     }
   </style>
