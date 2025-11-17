@@ -4,14 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UEat - Home</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
+    }
+
+    /* Top Navbar */
+    #topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #36591b;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2000;
+    }
+    #navbar {
+      display: flex;
+      align-items: center;
+    }
+    #navbar a {
+      color: #111;
+      font-family: "Alfa Slab One", serif;
+      text-decoration: none;
+      margin-left: 40px;
+      font-size: 2rem;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    #navbar a:hover {
+      color: #ffffff;
     }
 
     /* Sidebar */
@@ -24,19 +52,21 @@
       overflow-y: auto;
       position: fixed;
       left: 0;
-      top: 0;
+      top: 70px; /* changed for navbar height */
       transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-
     #sidebar.hidden {
       transform: translateX(-260px);
     }
-
-    #sidebar h2 {
-      font-family: "Alfa Slab One", serif;
-      margin-top: 0;
+    #sidebar img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 20px;
     }
-
     #sidebar a {
       color: white;
       text-decoration: none;
@@ -54,7 +84,7 @@
       cursor: pointer;
       position: fixed;
       width: 100%;
-      top: 0;
+      top: 70px; /* For navbar height */
       left: 0;
       z-index: 1000;
     }
@@ -62,33 +92,57 @@
     /* Main content */
     #content {
       margin-left: 260px;
-      padding: 40px;
+      padding: 40px 40px 40px 40px;
       font-family: "Alfa Slab One", serif;
+      margin-top: 70px;
+      /* For navbar */
     }
 
     @media (max-width: 768px) {
+      #topbar {
+        position: static;
+        height: 55px;
+      }
+      #navbar a {
+        font-size: 1rem;
+        margin-left: 20px;
+      }
       #mobileHeader {
         display: block;
+        top: 55px;
       }
       #sidebar {
         transform: translateX(-260px);
+        top: 55px;
       }
       #sidebar.show {
         transform: translateX(0);
       }
       #content {
         margin-left: 0;
-        padding-top: 80px;
+        padding-top: 120px;
       }
     }
   </style>
 </head>
 <body>
 
-<div id="mobileHeader" onclick="toggleSidebar()">☰ Faculties</div>
+<!-- Top Navbar -->
+<div id="topbar">
+  <div style="margin-left:40px;font-family:'Alfa Slab One', serif;font-size:2.5rem; color:#FFC107;">
+    <!-- Logo Text or Image (if needed on navbar) -->
+  </div>
+  <div id="navbar" style="margin-right:50px;">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact Us</a>
+  </div>
+</div>
 
+<!-- Sidebar -->
 <div id="sidebar">
-  <h2>Faculties</h2>
+  <!-- Logo image, replace src with your logo filename -->
+  <img src="Screen-Shot-2025-11-17-at-3.08.44-PM.jpg" alt="UEat Logo" />
   <div id="facultyList"></div>
 </div>
 
@@ -115,9 +169,7 @@
     "Faculty of Public Health",
     "Vocational Education Program"
   ];
-
   const listContainer = document.getElementById("facultyList");
-
   faculties.forEach(fac => {
     const fileName = fac.toLowerCase().replace(/ /g, "_") + ".html";
     const link = document.createElement("a");
@@ -125,12 +177,9 @@
     link.textContent = fac;
     listContainer.appendChild(link);
   });
-
   function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("show");
   }
 </script>
-
 </body>
 </html>
-
