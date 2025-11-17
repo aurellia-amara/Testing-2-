@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UEat - Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       display: flex;
+      background: #fff;
     }
 
     /* Top Navbar */
@@ -25,7 +26,25 @@
       justify-content: space-between;
       z-index: 2000;
     }
+    #topbar-left {
+      margin-left: 20px;
+      font-family: "Alfa Slab One", serif;
+      font-size: 2.5rem;
+      color: #ffc107; /* highlight color */
+      display: flex;
+      align-items: center;
+    }
+    #hamburgerBtn {
+      font-size: 2.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #111;
+      margin-right: 10px;
+      display: none;
+    }
     #navbar {
+      margin-right: 30px;
       display: flex;
       align-items: center;
     }
@@ -52,7 +71,7 @@
       overflow-y: auto;
       position: fixed;
       left: 0;
-      top: 70px; /* changed for navbar height */
+      top: 70px; /* Below navbar */
       transition: transform 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -74,117 +93,120 @@
       margin: 8px 0;
     }
 
-    /* Mobile top bar */
-    #mobileHeader {
-      display: none;
-      background: #1b5e20;
-      color: white;
-      padding: 15px;
-      font-size: 20px;
-      cursor: pointer;
-      position: fixed;
-      width: 100%;
-      top: 70px; /* For navbar height */
-      left: 0;
-      z-index: 1000;
-    }
-
-    /* Main content */
+    /* Content */
     #content {
-  margin-left: 260px;
-  margin-top: 70px;
-  padding: 40px 40px 40px 80px; /* Tambahkan padding kiri lebih besar */
-  font-family: "Alfa Slab One", serif;
-}
+      margin-left: 260px;
+      padding: 40px 40px 40px 80px;
+      font-family: "Alfa Slab One", serif;
+      margin-top: 70px;
     }
 
- @media (max-width: 768px) {
-  #content {
-    margin-left: 0;
-    padding: 32px 18px 32px 18px; /* space lebih dari pinggir */
-    margin-top: 110px; /* main content turun biar tidak tertutup navbar & header */
-    box-sizing: border-box;
-  }
-  #sidebar {
-    width: 60vw;
-    min-width: 210px;
-    max-width: 95vw;
-    padding: 24px 12px;
-    left: 0;
-    top: 55px;
-    /* sidebar tampil sebagai drawer ketika dibuka */
-  }
-  #sidebar img {
-    width: 90px;
-    height: 90px;
-  }
-  #navbar a {
-    font-size: 1rem;
-    margin-left: 14px;
-  }
-  #mobileHeader {
-    display: block;
-    top: 55px;
-  }
-}
-
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      #hamburgerBtn {
+        display: block;
+      }
+      #navbar a {
+        font-size: 1rem;
+        margin-left: 20px;
+      }
+      #content {
+        margin-left: 0;
+        padding: 32px 18px 32px 18px;
+        margin-top: 110px;
+        box-sizing: border-box;
+      }
+      #sidebar {
+        width: 60vw;
+        min-width: 210px;
+        max-width: 95vw;
+        padding: 24px 12px;
+        left: 0;
+        top: 55px;
+        position: fixed;
+        height: calc(100vh - 55px);
+        transform: translateX(-260px);
+        z-index: 2500;
+        background: #1b5e20;
+      }
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      #sidebar img {
+        width: 90px;
+        height: 90px;
+      }
+      #mobileHeader {
+        display: block;
+        top: 55px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- Top Navbar -->
-<div id="topbar">
-  <div style="margin-left:40px;font-family:'Alfa Slab One', serif;font-size:2.5rem; color:#FFC107;">
-    <!-- Logo Text or Image (if needed on navbar) -->
+  <!-- Top Navbar -->
+  <div id="topbar">
+    <div id="topbar-left">
+      <button id="hamburgerBtn" aria-label="Toggle sidebar">☰</button>
+      UEat
+    </div>
+    <div id="navbar">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact Us</a>
+    </div>
   </div>
-  <div id="navbar" style="margin-right:50px;">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact Us</a>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="hidden">
+    <!-- Ganti src dengan path logo yang kamu punya -->
+    <img src="Screen-Shot-2025-11-17-at-3.08.44-PM.jpg" alt="UEat Logo" />
+    <div id="facultyList"></div>
   </div>
-</div>
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <!-- Logo image, replace src with your logo filename -->
-  <img src="Screen-Shot-2025-11-17-at-3.08.44-PM.jpg" alt="UEat Logo" />
-  <div id="facultyList"></div>
-</div>
+  <!-- Main Content -->
+  <div id="content">
+    <h1>Welcome to UEat!</h1>
+    <p>Select your faculty to explore food recommendations.</p>
+  </div>
 
-<div id="content">
-  <h1>Welcome to UEat!</h1>
-  <p>Select your faculty to explore food recommendations.</p>
-</div>
+  <script>
+    const faculties = [
+      "Faculty of Medicine",
+      "Faculty of Dentistry",
+      "Faculty of Nursing",
+      "Faculty of Pharmacy",
+      "Faculty of Mathematics and Natural Sciences",
+      "Faculty of Engineering",
+      "Faculty of Computer Science",
+      "Faculty of Law",
+      "Faculty of Economics and Business",
+      "Faculty of Social and Political Sciences",
+      "Faculty of Humanities",
+      "Faculty of Psychology",
+      "Faculty of Administrative Sciences",
+      "Faculty of Public Health",
+      "Vocational Education Program"
+    ];
 
-<script>
-  const faculties = [
-    "Faculty of Medicine",
-    "Faculty of Dentistry",
-    "Faculty of Nursing",
-    "Faculty of Pharmacy",
-    "Faculty of Mathematics and Natural Sciences",
-    "Faculty of Engineering",
-    "Faculty of Computer Science",
-    "Faculty of Law",
-    "Faculty of Economics and Business",
-    "Faculty of Social and Political Sciences",
-    "Faculty of Humanities",
-    "Faculty of Psychology",
-    "Faculty of Administrative Sciences",
-    "Faculty of Public Health",
-    "Vocational Education Program"
-  ];
-  const listContainer = document.getElementById("facultyList");
-  faculties.forEach(fac => {
-    const fileName = fac.toLowerCase().replace(/ /g, "_") + ".html";
-    const link = document.createElement("a");
-    link.href = fileName;
-    link.textContent = fac;
-    listContainer.appendChild(link);
-  });
-  function toggleSidebar() {
-    document.getElementById("sidebar").classList.toggle("show");
-  }
-</script>
+    // Populate faculty list links
+    const listContainer = document.getElementById("facultyList");
+    faculties.forEach(fac => {
+      const fileName = fac.toLowerCase().replace(/ /g, "_") + ".html";
+      const link = document.createElement("a");
+      link.href = fileName;
+      link.textContent = fac;
+      listContainer.appendChild(link);
+    });
+
+    // Sidebar toggle for hamburger menu
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    hamburgerBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("show");
+    });
+  </script>
 </body>
 </html>
