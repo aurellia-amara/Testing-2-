@@ -11,7 +11,6 @@
       font-family: Arial, sans-serif;
       background: #fff;
     }
-
     #topbar {
       position: fixed;
       top: 0;
@@ -27,19 +26,19 @@
     #topbar-left {
       margin-left: 20px;
       font-family: "Alfa Slab One", serif;
-      font-size: 2.5rem;
+      font-size: 2.1rem;
       color: #ffc107;
       display: flex;
       align-items: center;
     }
     #hamburgerBtn {
-      font-size: 2.5rem;
+      font-size: 2.1rem;
       background: none;
       border: none;
       cursor: pointer;
       color: #111;
       margin-right: 10px;
-      display: none;
+      display: none; /* hanya muncul di mobile */
     }
     #navbar {
       margin-right: 30px;
@@ -50,22 +49,21 @@
       color: #111;
       font-family: "Alfa Slab One", serif;
       text-decoration: none;
-      margin-left: 40px;
-      font-size: 2rem;
+      margin-left: 25px;
+      font-size: 1.2rem;    /* diperkecil */
       font-weight: bold;
       transition: color 0.2s;
     }
     #navbar a:hover {
       color: #ffffff;
     }
-
     #sidebar {
-      width: 260px;
+      width: 210px;  /* lebih ramping */
       background: #1b5e20;
       color: white;
-      padding: 20px;
+      padding: 16px;
       height: 100vh;
-      overflow-y: auto;
+      overflow: hidden;
       position: fixed;
       left: 0;
       top: 70px;
@@ -76,27 +74,38 @@
       z-index: 2500;
       transform: translateX(0);
     }
-    #sidebar img {
-      width: 140px;
-      height: 140px;
+    #sideLogo {
+      width: 66px;   /* logo lebih kecil */
+      height: 66px;
       object-fit: contain;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+    #facultyList {
+      width: 100%;
+      flex: 1 1 0%;
+      overflow-y: auto;
+      margin-top: 4px;
+      padding-right: 2px;
+      max-height: 70vh;
     }
     #sidebar a {
       color: white;
       text-decoration: none;
       display: block;
       margin: 8px 0;
+      font-size: 1rem;
+      padding-left: 5px;
     }
-
+    #sidebar a:hover {
+      color: #FFC107;
+    }
     #content {
-      margin-left: 260px;
-      padding: 40px 40px 40px 80px;
+      margin-left: 210px;
+      padding: 40px 40px 40px 60px;
       font-family: "Alfa Slab One", serif;
       margin-top: 70px;
       transition: margin-left 0.3s;
     }
-
     /* Mobile Styles */
     @media (max-width: 768px) {
       #hamburgerBtn {
@@ -104,13 +113,13 @@
       }
       #navbar a {
         font-size: 1rem;
-        margin-left: 20px;
+        margin-left: 12px;
       }
       #sidebar {
-        width: 60vw;
-        min-width: 210px;
+        width: 65vw;
+        min-width: 140px;
         max-width: 95vw;
-        padding: 24px 12px;
+        padding: 12px 4px;
         left: 0;
         top: 55px;
         height: calc(100vh - 55px);
@@ -119,20 +128,23 @@
       #sidebar.show {
         transform: translateX(0);
       }
-      #sidebar img {
-        width: 90px;
-        height: 90px;
+      #sideLogo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+      #facultyList {
+        max-height: 60vh;
       }
       #content {
         margin-left: 0;
-        padding: 32px 18px 32px 18px;
+        padding: 22px 9px 22px 9px;
         margin-top: 110px;
         box-sizing: border-box;
         transition: none;
       }
     }
-
-    /* Desktop force show the sidebar */
+    /* Pastikan sidebar selalu muncul di desktop */
     @media (min-width: 769px) {
       #sidebar {
         transform: translateX(0) !important;
@@ -163,7 +175,7 @@
 
   <!-- Sidebar -->
   <div id="sidebar">
-    <img src="Screen-Shot-2025-11-17-at-3.08.44-PM.jpg" alt="UEat Logo" />
+    <img id="sideLogo" src="Screen-Shot-2025-11-17-at-3.08.44-PM.jpg" alt="UEat Logo" />
     <div id="facultyList"></div>
   </div>
 
@@ -174,6 +186,7 @@
   </div>
 
   <script>
+    // Isi daftar fakultas
     const faculties = [
       "Faculty of Medicine",
       "Faculty of Dentistry",
@@ -199,16 +212,15 @@
       link.textContent = fac;
       listContainer.appendChild(link);
     });
+    // Sidebar toggle hanya aktif di mobile
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const sidebar = document.getElementById("sidebar");
-
     hamburgerBtn.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
         sidebar.classList.toggle("show");
       }
     });
-
-    // Optional: Tutup sidebar jika tap di luar area sidebar pada mobile
+    // Optional: Tutup sidebar jika klik di luar area sidebar pada mobile
     window.addEventListener('click', function(e){
       if(window.innerWidth <= 768 && sidebar.classList.contains('show')) {
         if (!sidebar.contains(e.target) && !hamburgerBtn.contains(e.target)) {
