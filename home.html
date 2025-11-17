@@ -37,10 +37,6 @@
       display: flex;
       align-items: center;
     }
-    #topbar-left img {
-      height: 40px;
-      margin-right: 10px;
-    }
     #hamburgerBtn {
       font-size: 2.1rem;
       background: none;
@@ -85,10 +81,13 @@
       transform: translateX(0);
     }
     #sideLogo {
-      width: 66px;
-      height: 66px;
+      width: 120px; /* logo diperbesar */
+      height: auto;
       object-fit: contain;
       margin-bottom: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     #facultyList {
       width: 100%;
@@ -117,7 +116,6 @@
       transition: margin-left 0.3s;
     }
 
-    /* main-text styling */
     .main-text {
       text-align: center;
       margin-top: 130px;
@@ -126,23 +124,22 @@
       font-family: 'Alfa Slab One', serif;
       font-size: 2.5rem;
       font-weight: bold;
-      color: #171716;
+      color: white; /* seluruhnya warna putih */
       text-shadow: 2.5px 2.5px 7px rgba(0,0,0,0.20);
       line-height: 1.25;
       margin: 0 auto;
       letter-spacing: 1.5px;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       #hamburgerBtn {
         display: block;
       }
       #navbar {
-        display: flex; /* Tampilkan navbar di mobile */
+        display: flex; /* tampilkan navbar di mobile */
       }
       #navbar a {
-        font-size: 0.9rem; /* ukuran lebih kecil di mobile */
+        font-size: 0.9rem; /* lebih kecil di mobile */
       }
       #sidebar {
         width: 65vw;
@@ -161,9 +158,12 @@
         transform: translateX(0);
       }
       #sideLogo {
-        width: 50px;
-        height: 50px;
+        width: 100px; /* logo lebih kecil di mobile */
+        height: auto;
         margin-bottom: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
       }
       #facultyList {
         max-height: 60vh;
@@ -204,11 +204,8 @@
   <!-- Top Navbar -->
   <div id="topbar">
     <div id="topbar-left">
-      <img src="images/logo.png" alt="Logo" />
       <button id="hamburgerBtn" aria-label="Toggle sidebar">☰</button>
-      <a href="/" style="color:#ffc107; text-decoration:none; font-family:'Alfa Slab One', serif; font-size:2.1rem;">
-        UEat
-      </a>
+      <a href="/" style="color:#ffc107; text-decoration:none; font-family:'Alfa Slab One', serif; font-size:2.1rem;">UEat</a>
     </div>
     <div id="navbar">
       <a href="#">Home</a>
