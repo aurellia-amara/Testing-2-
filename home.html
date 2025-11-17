@@ -106,7 +106,22 @@
       margin-top: 70px;
       transition: margin-left 0.3s;
     }
-    /* Mobile Styles */
+
+    /* -------- Tambahan untuk main text -------- */
+    .main-text {
+      text-align: center;
+      margin-top: 55px;
+    }
+    .main-text h1 {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #171716;
+      text-shadow: 2.5px 2.5px 7px rgba(0,0,0,0.20);
+      line-height: 1.25;
+      margin: 0 auto;
+      letter-spacing: 1.5px;
+    }
     @media (max-width: 768px) {
       #hamburgerBtn {
         display: block;
@@ -142,6 +157,13 @@
         margin-top: 110px;
         box-sizing: border-box;
         transition: none;
+      }
+      .main-text h1 {
+        font-size: 1.18rem;
+        padding: 0 8px;
+      }
+      .main-text {
+        margin-top: 35px;
       }
     }
     /* Pastikan sidebar selalu muncul di desktop */
@@ -181,8 +203,13 @@
 
   <!-- Main Content -->
   <div id="content">
-    <h1>Welcome to UEat!</h1>
-    <p>Select your faculty to explore food recommendations.</p>
+    <div class="main-text">
+      <h1>
+        Don’t know where to eat <br>
+        here at UI? don’t worry! <br>
+        we gotchu
+      </h1>
+    </div>
   </div>
 
   <script>
